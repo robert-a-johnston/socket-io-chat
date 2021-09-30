@@ -20,14 +20,16 @@
     <form id="form" action="">
       <input id="input" autocomplete="off" /><button>Send</button>
     </form>
+    <!-- loads socket.io-client -->
     <script src="/socket.io/socket.io.js"></script>
     <script>
+      // url defaults to the host that serves the page
       var socket = io()
 
       var messages = document.getElementById('messages')
       var form = document.getElementById('form')
       var input = document.getElementById('input')
-
+      // create listener for the chat event
       form.addEventListener('submit', function(e) {
         e.preventDefault()
         if (input.value) {
@@ -35,7 +37,7 @@
           input.value = ''
         }
       })
-
+      // captures chat message and displays as list item
       socket.on('chat message', function(msg) {
         var item = document.createElement('li')
         item.textContent = msg
